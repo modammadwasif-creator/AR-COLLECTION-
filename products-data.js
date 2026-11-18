@@ -1,7 +1,8 @@
 /* =========================================
    AR COLLECTION - PRODUCT DATABASE
 ========================================= */
- const VIP_PRODUCTS = [
+
+const VIP_PRODUCTS = [
 
     // 1. SKMEI WATCH
     {
@@ -76,30 +77,28 @@ GOOD FINISHING
 IN NEW ATTRACTIVE COLOURS`,
 
         badge: "New Arrival",
-        featured: false,
+        featured: true,
         inStock: true
-    }
+    },
 
 
+    // 3. CHENXI COLLECTION
+    {
+        id: "watch-003",
+        name: "CHENXI Collection - Men's Watch",
+        category: "Men Watches",
+        price: 4000,
+        oldPrice: 4600,
 
+        images: [
+            "Screenshot 2026-11-18 171734.png",
+            "Screenshot 2026-11-18 171755.png",
+            "Screenshot 2026-11-18 171814.png",
+            "Screenshot 2026-11-18 171830.png",
+            "Screenshot 2026-11-18 171903.png"
+        ],
 
-// 3. CHENXI COLLECTION
-{
-    id: "watch-003",
-    name: "CHENXI Collection - Men's Watch",
-    category: "Men Watches",
-    price: 4000,
-    oldPrice: 4600,
-
-    images: [
-        "Screenshot 2026-11-18 171734.png",
-        "Screenshot 2026-11-18 171755.png",
-        "Screenshot 2026-11-18 171814.png",
-        "Screenshot 2026-11-18 171830.png",
-        "Screenshot 2026-11-18 171903.png"
-    ],
-
-    description: `AR COLLECTION
+        description: `AR COLLECTION
 
 INTRODUCING CHENXI COLLECTION
 
@@ -119,25 +118,14 @@ Time to Elevate Your Style
 PRICE: Rs. 4,000
 INCLUDES NORMAL BOX`,
 
-    badge: "New Arrival",
-    featured: true,
-    inStock: true
-},
-
-
-
-
-
-
-
-
-
-
-
-
-    
+        badge: "New Arrival",
+        featured: true,
+        inStock: true
+    }
 
 ];
+
+
 /* =========================================
    AR COLLECTION - PRODUCT HELPERS
 ========================================= */
@@ -195,7 +183,6 @@ function getAvailableProducts() {
 
 /* =========================================
    IMAGE PATH NORMALIZER
-   Product images are stored beside HTML files.
 ========================================= */
 
 function vipNormalizeImagePath(value) {
@@ -204,7 +191,6 @@ function vipNormalizeImagePath(value) {
 
     if (!raw) return "";
 
-    // Preserve full web URLs and data/blob URLs.
     if (
         /^(https?:)?\/\//i.test(raw) ||
         /^(data:|blob:)/i.test(raw)
@@ -214,7 +200,6 @@ function vipNormalizeImagePath(value) {
 
     }
 
-    // Support Windows separators and old folder paths.
     return raw.replace(/\\/g, "/").split("/").pop();
 
 }
@@ -246,7 +231,6 @@ VIP_PRODUCTS.forEach(function (product) {
         : [];
 
 
-    // Normalize variants only when actual variants are supplied.
     if (Array.isArray(product.variants)) {
 
         product.variants = product.variants.map(function (rawVariant, index) {
@@ -382,7 +366,6 @@ function getVIPProductVariants(product) {
     }
 
 
-    // Products with actual named variants.
     if (rawVariants.length) {
 
         return rawVariants.map(function (rawVariant, index) {
@@ -467,7 +450,6 @@ function getVIPProductVariants(product) {
     }
 
 
-    // Normal product: one standard option with all gallery images.
     return [{
 
         id: "standard",
@@ -520,7 +502,6 @@ function getAllProductImages() {
         ];
 
 
-        // Also include variant-only images.
         if (Array.isArray(product.variants)) {
 
             product.variants.forEach(function (variant) {
