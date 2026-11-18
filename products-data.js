@@ -80,6 +80,63 @@ IN NEW ATTRACTIVE COLOURS`,
         inStock: true
     }
 
+
+
+
+// 3. CHENXI COLLECTION
+{
+    id: "watch-003",
+    name: "CHENXI Collection - Men's Watch",
+    category: "Men Watches",
+    price: 4000,
+    oldPrice: 4600,
+
+    images: [
+        "Screenshot 2026-11-18 171734.png",
+        "Screenshot 2026-11-18 171755.png",
+        "Screenshot 2026-11-18 171814.png",
+        "Screenshot 2026-11-18 171830.png",
+        "Screenshot 2026-11-18 171903.png"
+    ],
+
+    description: `AR COLLECTION
+
+INTRODUCING CHENXI COLLECTION
+
+MEN'S COLLECTION
+
+Time to Elevate Your Style
+
+• Water Resistant
+• China Assembled
+• Chronograph Edition
+• Round Shape - Famous Tag Heuer Model
+• Time, Day/Date, Alarm & Stopwatch Display
+• All Inner Dials Working
+• Stainless Steel Band
+• Available in 2 Dial Colours
+
+PRICE: Rs. 4,000
+INCLUDES NORMAL BOX`,
+
+    badge: "New Arrival",
+    featured: true,
+    inStock: true
+},
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
 ];
 /* =========================================
    AR COLLECTION - PRODUCT HELPERS
