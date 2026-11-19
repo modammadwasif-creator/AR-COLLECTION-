@@ -1,7 +1,3 @@
-/* =========================================
-   AR COLLECTION - PRODUCT DATABASE
-========================================= */
-
 const VIP_PRODUCTS = [
 
     // 1. SKMEI WATCH
@@ -121,8 +117,7 @@ INCLUDES NORMAL BOX`,
         badge: "New Arrival",
         featured: true,
         inStock: true
-    }
-
+    },
 
 
     // 4. SEMI AUTO ROLEX SUBMARINER
@@ -159,29 +154,14 @@ GOOD FINISHING
 
 IN NEW ATTRACTIVE COLOURS
 
-LUXURY LOOK
-
-  `,
+LUXURY LOOK`,
 
         badge: "New Arrival",
         featured: true,
         inStock: true
-    },
+    }
 
-
-
-
-
-
-
-
-
-
-
-   
 ];
-
-
 /* =========================================
    AR COLLECTION - PRODUCT HELPERS
 ========================================= */
