@@ -3,636 +3,537 @@
    Search, Category, Sorting + Admin Picture ID Filter
 ========================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
+(function () {
 
-    const productGrid = document.querySelector("#shopProducts");
-    const searchInput = document.querySelector("#shopSearch");
-    const categoryFilter = document.querySelector("#categoryFilter");
-    const sortFilter = document.querySelector("#sortFilter");
-    const resultCount = document.querySelector("#resultCount");
+    function initShop() {
 
-    if (!productGrid) return;
+        const productGrid = document.querySelector("#shopProducts");
+        const searchInput = document.querySelector("#shopSearch");
+        const categoryFilter = document.querySelector("#categoryFilter");
+        const sortFilter = document.querySelector("#sortFilter");
+        const resultCount = document.querySelector("#resultCount");
 
+        if (!productGrid) {
+            console.error("AR COLLECTION: #shopProducts not found!");
+            return;
+        }
 
-    // Static-site passwords are visible in source code.
-    const ADMIN_FILTER_PASSWORD = "HY";
+        const ADMIN_FILTER_PASSWORD = "HY";
 
+        /* =====================================
+           GET PRODUCT DATA
+        ===================================== */
 
-    /* =====================================
-       HELPER FUNCTIONS
-    ===================================== */
+        function getProductSource() {
 
-    function escapeHTML(value) {
+            if (
+                typeof VIP_PRODUCTS !== "undefined" &&
+                Array.isArray(VIP_PRODUCTS)
+            ) {
+                return VIP_PRODUCTS;
+            }
 
-        return String(value ?? "").replace(/[&<>"']/g, char => ({
+            if (
+                Array.isArray(window.VIP_PRODUCTS)
+            ) {
+                return window.VIP_PRODUCTS;
+            }
 
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#39;"
+            return [];
+        }
 
-        })[char]);
+        /* =====================================
+           HELPER FUNCTIONS
+        ===================================== */
 
-    }
+        function escapeHTML(value) {
 
+            return String(value ?? "").replace(/[&<>"']/g, char => ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;"
+            })[char]);
 
-    function formatPrice(price) {
+        }
 
-        const amount = Number(price || 0);
+        function formatPrice(price) {
 
-        return amount > 0
+            const amount = Number(price || 0);
 
-            ? "Rs. " + amount.toLocaleString("en-PK")
+            return amount > 0
+                ? "Rs. " + amount.toLocaleString("en-PK")
+                : "Price coming soon";
 
-            : "Price coming soon";
+        }
 
-    }
+        function cleanImage(image) {
 
+            if (typeof vipNormalizeImagePath === "function") {
+                return vipNormalizeImagePath(image);
+            }
 
-    function cleanImage(image) {
+            return String(image || "");
 
-        return typeof vipNormalizeImagePath === "function"
+        }
 
-            ? vipNormalizeImagePath(image)
+        /* =====================================
+           PRODUCT CARD
+        ===================================== */
 
-            : String(image || "");
+        function createProductCard(product) {
 
-    }
+            const image = cleanImage(
+                Array.isArray(product.images)
+                    ? product.images[0]
+                    : product.image
+            );
 
+            const oldPrice =
+                Number(product.oldPrice) > Number(product.price) &&
+                Number(product.price) > 0
 
-    /* =====================================
-       PRODUCT CARD
-    ===================================== */
+                    ? `<span class="old-price">
+                            ${formatPrice(product.oldPrice)}
+                       </span>`
 
-    function createProductCard(product) {
+                    : "";
 
-        const image = cleanImage(product.images?.[0] || "");
+            return `
 
+                <article class="product-card">
 
-        const oldPrice =
-
-            Number(product.oldPrice) > Number(product.price) &&
-            Number(product.price) > 0
-
-                ? `<span class="old-price">
-                        ${formatPrice(product.oldPrice)}
-                   </span>`
-
-                : "";
-
-
-        return `
-
-            <article class="product-card">
-
-                <a
-                    href="product.html?id=${encodeURIComponent(product.id)}"
-                    class="product-image-wrap"
-                >
-
-                    ${
-                        product.badge
-
-                            ? `<span class="product-badge">
-                                    ${escapeHTML(product.badge)}
-                               </span>`
-
-                            : ""
-                    }
-
-
-                    <img
-                        src="${escapeHTML(image)}"
-                        alt="${escapeHTML(product.name)}"
-                        loading="lazy"
-                        onerror="this.style.display='none'"
+                    <a
+                        href="product.html?id=${encodeURIComponent(product.id)}"
+                        class="product-image-wrap"
                     >
 
-                </a>
+                        ${
+                            product.badge
+                                ? `<span class="product-badge">
+                                        ${escapeHTML(product.badge)}
+                                   </span>`
+                                : ""
+                        }
 
-
-                <div class="product-info">
-
-                    <span class="product-category">
-                        ${escapeHTML(product.category || "")}
-                    </span>
-
-
-                    <h3>
-
-                        <a href="product.html?id=${encodeURIComponent(product.id)}">
-
-                            ${escapeHTML(product.name)}
-
-                        </a>
-
-                    </h3>
-
-
-                    <div class="product-price">
-
-                        <span class="current-price">
-
-                            ${formatPrice(product.price)}
-
-                        </span>
-
-                        ${oldPrice}
-
-                    </div>
-
-
-                    <div class="product-card-actions">
-
-                        <a
-                            href="product.html?id=${encodeURIComponent(product.id)}"
-                            class="btn btn-primary"
+                        <img
+                            src="${escapeHTML(image)}"
+                            alt="${escapeHTML(product.name)}"
+                            loading="lazy"
+                            onerror="this.style.display='none'"
                         >
 
-                            View Product
+                    </a>
 
-                        </a>
+                    <div class="product-info">
+
+                        <span class="product-category">
+                            ${escapeHTML(product.category || "")}
+                        </span>
+
+                        <h3>
+                            <a href="product.html?id=${encodeURIComponent(product.id)}">
+                                ${escapeHTML(product.name)}
+                            </a>
+                        </h3>
+
+                        <div class="product-price">
+
+                            <span class="current-price">
+                                ${formatPrice(product.price)}
+                            </span>
+
+                            ${oldPrice}
+
+                        </div>
+
+                        <div class="product-card-actions">
+
+                            <a
+                                href="product.html?id=${encodeURIComponent(product.id)}"
+                                class="btn btn-primary"
+                            >
+                                View Product
+                            </a>
+
+                        </div>
 
                     </div>
 
-                </div>
-
-            </article>
-
-        `;
-
-    }
-
-
-    /* =====================================
-       DISPLAY PRODUCTS
-    ===================================== */
-
-    let filteredProducts = [];
-
-
-    function displayProducts(products) {
-
-        productGrid.innerHTML = products.length
-
-            ? products.map(createProductCard).join("")
-
-            : `
-
-                <div class="shop-empty">
-
-                    <h3>No Watches Found</h3>
-
-                    <p>
-                        Try another search or category.
-                    </p>
-
-                </div>
+                </article>
 
             `;
 
-
-        if (resultCount) {
-
-            resultCount.textContent = String(products.length);
-
         }
 
-    }
+        /* =====================================
+           DISPLAY PRODUCTS
+        ===================================== */
 
+        let filteredProducts = [];
 
-    /* =====================================
-       PRODUCT SORTING
-    ===================================== */
+        function displayProducts(products) {
 
-    function applySorting() {
+            if (!products.length) {
 
-        const sort = sortFilter?.value || "default";
+                productGrid.innerHTML = `
 
-        const sorted = [...filteredProducts];
+                    <div class="shop-empty">
 
+                        <h3>No Watches Found</h3>
 
-        if (sort === "low-high") {
+                        <p>
+                            Try another search or category.
+                        </p>
 
-            sorted.sort(
+                    </div>
 
-                (a, b) => Number(a.price || 0) - Number(b.price || 0)
+                `;
 
-            );
+            } else {
 
-        }
-
-        else if (sort === "high-low") {
-
-            sorted.sort(
-
-                (a, b) => Number(b.price || 0) - Number(a.price || 0)
-
-            );
-
-        }
-
-        else if (sort === "name") {
-
-            sorted.sort(
-
-                (a, b) => String(a.name).localeCompare(String(b.name))
-
-            );
-
-        }
-
-
-        displayProducts(sorted);
-
-    }
-
-
-    /* =====================================
-       SEARCH + CATEGORY FILTER
-    ===================================== */
-
-    function applyFilters() {
-
-        const search = String(searchInput?.value || "")
-
-            .trim()
-
-            .toLowerCase();
-
-
-        const category = String(categoryFilter?.value || "all")
-
-            .trim()
-
-            .toLowerCase();
-
-
-        const source =
-
-            typeof VIP_PRODUCTS !== "undefined" &&
-            Array.isArray(VIP_PRODUCTS)
-
-                ? VIP_PRODUCTS
-
-                : [];
-
-
-        filteredProducts = source.filter(function (product) {
-
-
-            const searchable = [
-
-                product.name,
-
-                product.category,
-
-                product.description
-
-            ]
-
-                .map(value => String(value || "").toLowerCase())
-
-                .join(" ");
-
-
-            const matchesSearch = searchable.includes(search);
-
-
-            const matchesCategory =
-
-                category === "all" ||
-
-                String(product.category || "")
-
-                    .trim()
-
-                    .toLowerCase() === category;
-
-
-            return (
-
-                product.inStock !== false &&
-
-                matchesSearch &&
-
-                matchesCategory
-
-            );
-
-        });
-
-
-        applySorting();
-
-    }
-
-
-    /* =====================================
-       FILTER EVENTS
-    ===================================== */
-
-    searchInput?.addEventListener("input", applyFilters);
-
-    categoryFilter?.addEventListener("change", applyFilters);
-
-    sortFilter?.addEventListener("change", applySorting);
-
-
-    /* =====================================
-       URL CATEGORY FILTER
-    ===================================== */
-
-    const params = new URLSearchParams(window.location.search);
-
-    const categoryFromURL = params.get("category");
-
-
-    if (categoryFromURL && categoryFilter) {
-
-        const match = Array.from(categoryFilter.options).find(
-
-            option =>
-
-                option.value.toLowerCase() ===
-
-                categoryFromURL.trim().toLowerCase()
-
-        );
-
-
-        if (match) {
-
-            categoryFilter.value = match.value;
-
-        }
-
-    }
-
-
-    /* =====================================
-       ADMIN PICTURE ID FILTER
-    ===================================== */
-
-    const adminButton = document.querySelector(
-        "#adminImageFilterButton"
-    );
-
-
-    const adminPanel = document.querySelector(
-        "#adminImageFilterPanel"
-    );
-
-
-    const pictureInput = document.querySelector(
-        "#pictureIdInput"
-    );
-
-
-    const pictureFindButton = document.querySelector(
-        "#pictureIdFindButton"
-    );
-
-
-    const adminResult = document.querySelector(
-        "#adminImageResult"
-    );
-
-
-    /* =====================================
-       ADMIN PANEL OPEN / CLOSE
-    ===================================== */
-
-    if (adminButton && adminPanel) {
-
-        adminPanel.hidden = true;
-
-
-        adminButton.addEventListener("click", function () {
-
-
-            // Close panel if already open.
-            if (!adminPanel.hidden) {
-
-                adminPanel.hidden = true;
-
-                return;
+                productGrid.innerHTML = products
+                    .map(createProductCard)
+                    .join("");
 
             }
 
+            if (resultCount) {
+                resultCount.textContent = products.length;
+            }
 
-            const enteredPassword = window.prompt(
-                "Enter Admin Password:"
-            );
+        }
 
+        /* =====================================
+           SORT PRODUCTS
+        ===================================== */
 
-            if (enteredPassword === null) return;
+        function applySorting() {
 
+            const sort = sortFilter?.value || "default";
 
-            if (enteredPassword !== ADMIN_FILTER_PASSWORD) {
+            const sorted = [...filteredProducts];
 
-                alert("Incorrect Admin Password!");
+            if (sort === "low-high") {
 
-                return;
+                sorted.sort(
+                    (a, b) => Number(a.price || 0) - Number(b.price || 0)
+                );
+
+            } else if (sort === "high-low") {
+
+                sorted.sort(
+                    (a, b) => Number(b.price || 0) - Number(a.price || 0)
+                );
+
+            } else if (sort === "name") {
+
+                sorted.sort(
+                    (a, b) => String(a.name || "").localeCompare(
+                        String(b.name || "")
+                    )
+                );
 
             }
 
-
-            adminPanel.hidden = false;
-
-            pictureInput?.focus();
-
-        });
-
-    }
-
-
-    /* =====================================
-       FIND PRODUCT IMAGE BY PICTURE ID
-    ===================================== */
-
-    function findPicture() {
-
-        const pictureId = String(pictureInput?.value || "").trim();
-
-
-        if (!pictureId) {
-
-            alert("Please enter a Picture ID.");
-
-            return;
+            displayProducts(sorted);
 
         }
 
+        /* =====================================
+           SEARCH + CATEGORY FILTER
+        ===================================== */
 
-        if (typeof findProductImageById !== "function") {
+        function applyFilters() {
 
-            alert("Picture ID system is not loaded!");
+            const search = String(searchInput?.value || "")
+                .trim()
+                .toLowerCase();
 
-            return;
+            const category = String(categoryFilter?.value || "all")
+                .trim()
+                .toLowerCase();
 
-        }
+            const source = getProductSource();
 
+            filteredProducts = source.filter(function (product) {
 
-        const found = findProductImageById(pictureId);
+                if (!product || typeof product !== "object") {
+                    return false;
+                }
 
+                const searchable = [
 
-        if (!found) {
+                    product.name,
+                    product.category,
+                    product.description
 
-            if (adminResult) {
+                ]
+                    .map(value => String(value || "").toLowerCase())
+                    .join(" ");
 
-                adminResult.innerHTML = `
+                const matchesSearch = searchable.includes(search);
 
-                    <p class="admin-no-result">
+                const matchesCategory =
+                    category === "all" ||
+                    String(product.category || "")
+                        .trim()
+                        .toLowerCase() === category;
 
-                        Picture ID Not Found!
+                return (
+                    product.inStock !== false &&
+                    matchesSearch &&
+                    matchesCategory
+                );
 
-                    </p>
+            });
+
+            applySorting();
+
+            console.info(
+                "AR COLLECTION: Products found:",
+                filteredProducts.length,
+                "Total products:",
+                source.length
+            );
+
+            if (!source.length) {
+
+                productGrid.innerHTML = `
+
+                    <div class="shop-empty">
+
+                        <h3>Products Could Not Load</h3>
+
+                        <p>
+                            Please check products-data.js.
+                        </p>
+
+                    </div>
 
                 `;
 
             }
 
-            return;
+        }
+
+        /* =====================================
+           FILTER EVENTS
+        ===================================== */
+
+        searchInput?.addEventListener("input", applyFilters);
+
+        categoryFilter?.addEventListener("change", applyFilters);
+
+        sortFilter?.addEventListener("change", applySorting);
+
+        /* =====================================
+           URL CATEGORY FILTER
+        ===================================== */
+
+        const params = new URLSearchParams(window.location.search);
+
+        const categoryFromURL = params.get("category");
+
+        if (categoryFromURL && categoryFilter) {
+
+            const match = Array.from(categoryFilter.options).find(
+                option =>
+                    option.value.toLowerCase() ===
+                    categoryFromURL.trim().toLowerCase()
+            );
+
+            if (match) {
+                categoryFilter.value = match.value;
+            }
 
         }
 
+        /* =====================================
+           ADMIN PICTURE ID FILTER
+        ===================================== */
 
-        const product =
+        const adminButton = document.querySelector(
+            "#adminImageFilterButton"
+        );
 
-            typeof getProductById === "function"
+        const adminPanel = document.querySelector(
+            "#adminImageFilterPanel"
+        );
 
-                ? getProductById(found.productId)
+        const pictureInput = document.querySelector(
+            "#pictureIdInput"
+        );
 
-                : VIP_PRODUCTS.find(
+        const pictureFindButton = document.querySelector(
+            "#pictureIdFindButton"
+        );
 
-                    item => String(item.id) === String(found.productId)
+        const adminResult = document.querySelector(
+            "#adminImageResult"
+        );
 
+        /* =====================================
+           ADMIN PANEL OPEN / CLOSE
+        ===================================== */
+
+        if (adminButton && adminPanel) {
+
+            adminPanel.hidden = true;
+
+            adminButton.addEventListener("click", function () {
+
+                if (!adminPanel.hidden) {
+                    adminPanel.hidden = true;
+                    return;
+                }
+
+                const enteredPassword = window.prompt(
+                    "Enter Admin Password:"
                 );
 
+                if (enteredPassword === null) return;
 
-        if (!adminResult) return;
+                if (enteredPassword !== ADMIN_FILTER_PASSWORD) {
 
+                    alert("Incorrect Admin Password!");
+                    return;
 
-        adminResult.innerHTML = `
+                }
 
-            <div class="admin-picture-result">
+                adminPanel.hidden = false;
+                pictureInput?.focus();
 
+            });
 
-                <img
+        }
 
-                    src="${escapeHTML(found.imageUrl)}"
+        /* =====================================
+           FIND IMAGE BY PICTURE ID
+        ===================================== */
 
-                    alt="${escapeHTML(found.productName)}"
+        function findPicture() {
 
-                >
+            const pictureId = String(
+                pictureInput?.value || ""
+            ).trim();
 
+            if (!pictureId) {
+                alert("Please enter a Picture ID.");
+                return;
+            }
 
-                <div>
+            if (typeof findProductImageById !== "function") {
+                alert("Picture ID system is not loaded!");
+                return;
+            }
 
-                    <h3>
+            const found = findProductImageById(pictureId);
 
-                        ${escapeHTML(found.productName)}
+            if (!found) {
 
-                    </h3>
+                if (adminResult) {
 
+                    adminResult.innerHTML = `
+                        <p class="admin-no-result">
+                            Picture ID Not Found!
+                        </p>
+                    `;
 
-                    <p>
+                }
 
-                        Picture ID:
+                return;
 
-                        <strong>
+            }
 
-                            ${escapeHTML(found.pictureId)}
+            const source = getProductSource();
 
-                        </strong>
+            const product =
+                typeof getProductById === "function"
+                    ? getProductById(found.productId)
+                    : source.find(
+                        item => String(item.id) === String(found.productId)
+                    );
 
-                    </p>
+            if (!adminResult) return;
 
+            adminResult.innerHTML = `
 
-                    <p>
+                <div class="admin-picture-result">
 
-                        Image file:
+                    <img
+                        src="${escapeHTML(found.imageUrl)}"
+                        alt="${escapeHTML(found.productName)}"
+                    >
 
-                        ${escapeHTML(found.imageUrl)}
+                    <div>
 
-                    </p>
+                        <h3>
+                            ${escapeHTML(found.productName)}
+                        </h3>
 
+                        <p>
+                            Picture ID:
+                            <strong>${escapeHTML(found.pictureId)}</strong>
+                        </p>
 
-                    ${
+                        <p>
+                            Image file:
+                            ${escapeHTML(found.imageUrl)}
+                        </p>
 
-                        product
+                        ${
+                            product
+                                ? `
+                                    <a
+                                        class="btn btn-primary"
+                                        href="product.html?id=${encodeURIComponent(product.id)}"
+                                    >
+                                        Open Product
+                                    </a>
+                                `
+                                : ""
+                        }
 
-                            ? `
-
-                                <a
-
-                                    class="btn btn-primary"
-
-                                    href="product.html?id=${encodeURIComponent(product.id)}"
-
-                                >
-
-                                    Open Product
-
-                                </a>
-
-                            `
-
-                            : ""
-
-                    }
+                    </div>
 
                 </div>
 
-
-            </div>
-
-        `;
-
-    }
-
-
-    /* =====================================
-       ADMIN BUTTON EVENTS
-    ===================================== */
-
-    pictureFindButton?.addEventListener(
-
-        "click",
-
-        findPicture
-
-    );
-
-
-    pictureInput?.addEventListener("keydown", function (event) {
-
-        if (event.key === "Enter") {
-
-            findPicture();
+            `;
 
         }
 
-    });
+        pictureFindButton?.addEventListener("click", findPicture);
 
+        pictureInput?.addEventListener("keydown", function (event) {
+
+            if (event.key === "Enter") {
+                findPicture();
+            }
+
+        });
+
+        /* =====================================
+           INITIAL PRODUCT LOAD
+        ===================================== */
+
+        applyFilters();
+
+    }
 
     /* =====================================
-       INITIAL PRODUCT LOAD
+       SAFE INITIALIZATION
     ===================================== */
 
-    applyFilters();
+    if (document.readyState === "loading") {
 
+        document.addEventListener("DOMContentLoaded", initShop);
 
-    console.info(
+    } else {
 
-        "AR COLLECTION SHOP LOADED:",
+        initShop();
 
-        filteredProducts.length,
+    }
 
-        "watches"
-
-    );
-
-});
+})();
