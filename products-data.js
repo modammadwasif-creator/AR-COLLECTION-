@@ -10,7 +10,7 @@ const VIP_PRODUCTS = [
         name: "SKMEI Original 9232",
         category: "Men Watches",
         price: 3500,
-        oldPrice: 3800,
+        oldPrice: 3900,
 
         images: [
             "Screenshot 2026-11-18 011413.png",
@@ -49,7 +49,7 @@ LUXURY LOOK`,
         name: "Rolex Submariner - Basil Rotating",
         category: "Men Watches",
         price: 2300,
-        oldPrice: 2800,
+        oldPrice: 2700,
 
         images: [
             "Screenshot 2026-11-18 011435.png",
@@ -123,6 +123,62 @@ INCLUDES NORMAL BOX`,
         inStock: true
     }
 
+
+
+    // 4. SEMI AUTO ROLEX SUBMARINER
+    {
+        id: "watch-004",
+        name: "Semi Auto Rolex Submariner - Basil Rotating",
+        category: "Men Watches",
+        price: 3000,
+        oldPrice: 3500,
+
+        images: [
+            "Screenshot 2026-11-19 161321.png",
+            "Screenshot 2026-11-19 161416.png",
+            "Screenshot 2026-11-19 161434.png"
+        ],
+
+        description: `NEW ARRIVAL
+
+SEMI AUTO ROLEX
+
+LUXURY WATCH
+
+ROLEX SUBMARINER
+
+BASIL ROTATING
+
+DATE WORKING
+
+STAINLESS STEEL CHAIN
+
+GENTS WEAR
+
+GOOD FINISHING
+
+IN NEW ATTRACTIVE COLOURS
+
+LUXURY LOOK
+
+  `,
+
+        badge: "New Arrival",
+        featured: true,
+        inStock: true
+    },
+
+
+
+
+
+
+
+
+
+
+
+   
 ];
 
 
