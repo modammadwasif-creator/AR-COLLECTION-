@@ -200,46 +200,7 @@ INCLUDES NORMAL BOX`,
     },
 
 
-    // 6. SEMI AUTO ROLEX SUBMARINER
-    {
-        id: "watch-004",
-        name: "Semi Auto Rolex Submariner - Basil Rotating",
-        category: "Men Watches",
-        price: 3000,
-        oldPrice: 3500,
-
-        images: [
-            "Screenshot 2026-11-19 161321.png",
-            "Screenshot 2026-11-19 161416.png",
-            "Screenshot 2026-11-19 161434.png"
-        ],
-
-        description: `NEW ARRIVAL
-
-SEMI AUTO ROLEX
-
-LUXURY WATCH
-
-ROLEX SUBMARINER
-
-BASIL ROTATING
-
-DATE WORKING
-
-STAINLESS STEEL CHAIN
-
-GENTS WEAR
-
-GOOD FINISHING
-
-IN NEW ATTRACTIVE COLOURS
-
-LUXURY LOOK`,
-
-        badge: "New Arrival",
-        featured: true,
-        inStock: true
-    }
+   
   // 7. MINBER LUXURY WATCH
     {
         id: "watch-007",
