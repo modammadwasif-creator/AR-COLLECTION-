@@ -1,12 +1,45 @@
 const VIP_PRODUCTS = [
+    // 7. MINBER LUXURY WATCH
+    {
+        id: "watch-007",
+        name: "MINBER Luxury Gents Watch",
+        category: "Men Watches",
+        price: 3000,
+  oldPrice: 3600,
+        description: `LUXURY WATCH
 
+MINBER
+
+DATE WORKING
+
+SILICON STRAP
+
+GENTS WEAR
+
+GOOD FINISHING
+
+IN NEW ATTRACTIVE COLOURS
+
+RS 3000 ONLY`,
+
+        images: [
+            "Screenshot 2026-11-19 195222.png",
+            "Screenshot 2026-11-19 195232.png",
+            "Screenshot 2026-11-19 195152.png",
+            "Screenshot 2026-11-19 195210.png"
+        ],
+
+        badge: "New Arrival",
+        featured: true,
+        inStock: true
+    },
     // 1. ROLEX LADIES DATE & DAY
     {
         id: "watch-005",
         name: "ROLEX Ladies Date & Day",
         category: "Ladies Watches",
         price: 2700,
-
+          oldPrice: 2900,
         description: `NEW ARRIVAL
 
 LUXURY WATCH
