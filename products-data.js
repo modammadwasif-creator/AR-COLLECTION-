@@ -1,27 +1,86 @@
 const VIP_PRODUCTS = [
-{
-    id: "watch-005",
-    name: "ROLEX Ladies Date & Day",
-    category: "Ladies Watches",
-    price: 2700,
 
-    description: "NEW ARRIVAL! Luxury ROLEX Ladies Watch. Date and Day Working, Stainless Steel Chain, Ladies Wear, Good Finishing, New Attractive Colours and Luxury Look.",
+    // 1. ROLEX LADIES DATE & DAY
+    {
+        id: "watch-005",
+        name: "ROLEX Ladies Date & Day",
+        category: "Ladies Watches",
+        price: 2700,
 
-    images: [
-        "Screenshot 2026-11-19 174128.png",
-        "Screenshot 2026-11-19 174143.png",
-        "Screenshot 2026-11-19 174157.png",
-        "Screenshot 2026-11-19 174212.png",
-        "Screenshot 2026-11-19 174226.png",
-        "Screenshot 2026-11-19 174235.png",
-        "Screenshot 2026-11-19 174245.png",
-        "Screenshot 2026-11-19 174345.png"
-    ],
+        description: `NEW ARRIVAL
 
-    featured: true,
-    inStock: true
-}
-    // 1. SKMEI WATCH
+LUXURY WATCH
+
+ROLEX LADIES
+
+DATE & DAY WORKING
+
+STAINLESS STEEL CHAIN
+
+LADIES WEAR
+
+GOOD FINISHING
+
+IN NEW ATTRACTIVE COLOURS
+
+LUXURY LOOK`,
+
+        images: [
+            "Screenshot 2026-11-19 174128.png",
+            "Screenshot 2026-11-19 174143.png",
+            "Screenshot 2026-11-19 174157.png",
+            "Screenshot 2026-11-19 174212.png",
+            "Screenshot 2026-11-19 174226.png",
+            "Screenshot 2026-11-19 174235.png",
+            "Screenshot 2026-11-19 174245.png",
+            "Screenshot 2026-11-19 174345.png"
+        ],
+
+        badge: "New Arrival",
+        featured: true,
+        inStock: true
+    },
+
+
+    // 2. TOSHI LUXURY GENTS WATCH
+    {
+        id: "watch-006",
+        name: "TOSHI Luxury Gents Watch",
+        category: "Men Watches",
+        price: 1700,
+        oldPrice: 2100,
+
+        description: `NEW ARRIVAL
+
+TOSHI
+
+LUXURY WATCH
+
+DATE WORKING
+
+STAINLESS STEEL CHAIN
+
+GENTS WEAR
+
+GOOD FINISHING
+
+IN NEW ATTRACTIVE COLOURS
+
+LUXURY LOOK`,
+
+        images: [
+            "Screenshot 2026-11-19 174902.png",
+            "Screenshot 2026-11-19 174913.png",
+            "Screenshot 2026-11-19 174924.png"
+        ],
+
+        badge: "New Arrival",
+        featured: true,
+        inStock: true
+    },
+
+
+    // 3. SKMEI WATCH
     {
         id: "watch-001",
         name: "SKMEI Original 9232",
@@ -60,7 +119,7 @@ LUXURY LOOK`,
     },
 
 
-    // 2. ROLEX SUBMARINER
+    // 4. ROLEX SUBMARINER
     {
         id: "watch-002",
         name: "Rolex Submariner - Basil Rotating",
@@ -99,7 +158,7 @@ IN NEW ATTRACTIVE COLOURS`,
     },
 
 
-    // 3. CHENXI COLLECTION
+    // 5. CHENXI COLLECTION
     {
         id: "watch-003",
         name: "CHENXI Collection - Men's Watch",
@@ -141,7 +200,7 @@ INCLUDES NORMAL BOX`,
     },
 
 
-    // 4. SEMI AUTO ROLEX SUBMARINER
+    // 6. SEMI AUTO ROLEX SUBMARINER
     {
         id: "watch-004",
         name: "Semi Auto Rolex Submariner - Basil Rotating",
