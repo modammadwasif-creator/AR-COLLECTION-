@@ -1,5 +1,26 @@
 const VIP_PRODUCTS = [
+{
+    id: "watch-005",
+    name: "ROLEX Ladies Date & Day",
+    category: "Ladies Watches",
+    price: 2700,
 
+    description: "NEW ARRIVAL! Luxury ROLEX Ladies Watch. Date and Day Working, Stainless Steel Chain, Ladies Wear, Good Finishing, New Attractive Colours and Luxury Look.",
+
+    images: [
+        "Screenshot 2026-11-19 174128.png",
+        "Screenshot 2026-11-19 174143.png",
+        "Screenshot 2026-11-19 174157.png",
+        "Screenshot 2026-11-19 174212.png",
+        "Screenshot 2026-11-19 174226.png",
+        "Screenshot 2026-11-19 174235.png",
+        "Screenshot 2026-11-19 174245.png",
+        "Screenshot 2026-11-19 174345.png"
+    ],
+
+    featured: true,
+    inStock: true
+}
     // 1. SKMEI WATCH
     {
         id: "watch-001",
