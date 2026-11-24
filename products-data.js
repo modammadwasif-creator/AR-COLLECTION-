@@ -1,5 +1,35 @@
 const VIP_PRODUCTS = [
-  
+  // 7. COSMO WATCH
+{
+    id: "watch-005",
+    name: "COSMO",
+    category: "Men Watches",
+    price: 2000,
+    oldPrice: 2600,
+
+    description: `NEW ARRIVAL
+
+NEW MODEL
+
+DATE & DAY WORKING
+
+LUXURY LOOK
+
+NEW ATTRACTIVE COLOURS
+
+PRICE ONLY Rs. 2,000 WITH NORMAL BOX`,
+
+    images: [
+        "Screenshot 2026-11-24 235701.png",
+        "Screenshot 2026-11-24 235713.png",
+        "Screenshot 2026-11-24 235722.png",
+        "Screenshot 2026-11-24 235645.png"
+    ],
+
+    badge: "New Arrival",
+    featured: true,
+    inStock: true
+},
     // 1. ROLEX LADIES DATE & DAY
     {
         id: "watch-005",
