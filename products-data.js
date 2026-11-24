@@ -1,13 +1,14 @@
 const VIP_PRODUCTS = [
-  // 7. COSMO WATCH
-{
-    id: "watch-005",
-    name: "COSMO",
-    category: "Men Watches",
-    price: 2000,
-    oldPrice: 2600,
 
-    description: `NEW ARRIVAL
+    // 1. COSMO WATCH
+    {
+        id: "watch-008",
+        name: "COSMO",
+        category: "Men Watches",
+        price: 2000,
+        oldPrice: 2600,
+
+        description: `NEW ARRIVAL
 
 NEW MODEL
 
@@ -19,24 +20,26 @@ NEW ATTRACTIVE COLOURS
 
 PRICE ONLY Rs. 2,000 WITH NORMAL BOX`,
 
-    images: [
-        "Screenshot 2026-11-24 235701.png",
-        "Screenshot 2026-11-24 235713.png",
-        "Screenshot 2026-11-24 235722.png",
-        "Screenshot 2026-11-24 235645.png"
-    ],
+        images: [
+            "Screenshot 2026-11-24 235701.png",
+            "Screenshot 2026-11-24 235713.png",
+            "Screenshot 2026-11-24 235722.png",
+            "Screenshot 2026-11-24 235645.png"
+        ],
 
-    badge: "New Arrival",
-    featured: true,
-    inStock: true
-},
-    // 1. ROLEX LADIES DATE & DAY
+        badge: "New Arrival",
+        featured: true,
+        inStock: true
+    },
+
+    // 2. ROLEX LADIES DATE & DAY
     {
         id: "watch-005",
         name: "ROLEX Ladies Date & Day",
         category: "Ladies Watches",
         price: 2700,
-          oldPrice: 2900,
+        oldPrice: 2900,
+
         description: `NEW ARRIVAL
 
 LUXURY WATCH
@@ -71,8 +74,7 @@ LUXURY LOOK`,
         inStock: true
     },
 
-
-    // 2. TOSHI LUXURY GENTS WATCH
+    // 3. TOSHI LUXURY GENTS WATCH
     {
         id: "watch-006",
         name: "TOSHI Luxury Gents Watch",
@@ -109,8 +111,7 @@ LUXURY LOOK`,
         inStock: true
     },
 
-
-    // 3. SKMEI WATCH
+    // 4. SKMEI WATCH
     {
         id: "watch-001",
         name: "SKMEI Original 9232",
@@ -148,8 +149,7 @@ LUXURY LOOK`,
         inStock: true
     },
 
-
-    // 4. ROLEX SUBMARINER
+    // 5. ROLEX SUBMARINER
     {
         id: "watch-002",
         name: "Rolex Submariner - Basil Rotating",
@@ -187,8 +187,7 @@ IN NEW ATTRACTIVE COLOURS`,
         inStock: true
     },
 
-
-    // 5. CHENXI COLLECTION
+    // 6. CHENXI COLLECTION
     {
         id: "watch-003",
         name: "CHENXI Collection - Men's Watch",
@@ -229,15 +228,14 @@ INCLUDES NORMAL BOX`,
         inStock: true
     },
 
-
-   
-  // 7. MINBER LUXURY WATCH
+    // 7. MINBER LUXURY WATCH
     {
         id: "watch-007",
         name: "MINBER Luxury Gents Watch",
         category: "Men Watches",
         price: 3000,
-  oldPrice: 3600,
+        oldPrice: 3600,
+
         description: `LUXURY WATCH
 
 MINBER
@@ -265,7 +263,8 @@ RS 3000 ONLY`,
         featured: true,
         inStock: true
     },
-   // 6. SEMI AUTO ROLEX SUBMARINER
+
+    // 8. SEMI AUTO ROLEX SUBMARINER
     {
         id: "watch-004",
         name: "Semi Auto Rolex Submariner - Basil Rotating",
@@ -305,6 +304,7 @@ LUXURY LOOK`,
         featured: true,
         inStock: true
     }
+
 ];
 /* =========================================
    AR COLLECTION - PRODUCT HELPERS
