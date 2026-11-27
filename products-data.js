@@ -1,4 +1,45 @@
 const VIP_PRODUCTS = [
+
+
+
+// TOSHI WATCH
+{
+    id: "watch-010",
+    name: "TOSHI",
+    category: "Men Watches",
+    price: 1400,
+    oldPrice: 1900,
+
+    description: `NEW ARRIVAL
+
+TOSHI
+
+AP MODEL
+
+DATE WORKING
+
+NEW ATTRACTIVE COLOURS
+
+PRICE ONLY Rs. 1,400 WITH NORMAL BOX`,
+
+    images: [
+        "Screenshot 2026-11-27 215058.png",
+        "Screenshot 2026-11-27 215021.png",
+        "Screenshot 2026-11-27 215033.png"
+    ],
+
+    badge: "New Arrival",
+    featured: true,
+    inStock: true
+},
+
+
+
+
+
+
+
+    
 // TISSOT COUPLE WATCH
 {
     id: "watch-009",
