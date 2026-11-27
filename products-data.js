@@ -1,5 +1,42 @@
 const VIP_PRODUCTS = [
+// TISSOT COUPLE WATCH
+{
+    id: "watch-009",
+    name: "TISSOT COUPLE WATCH",
+    category: "Couple Watches",
+    price: 5600,
+    oldPrice: 7100,
 
+    description: `PREMIUM QUALITY
+
+COUPLE WATCH SET
+
+DATE WORKING
+
+BUTTERFLY LOCK
+
+9 DIFFERENT COLOURS AVAILABLE
+
+WITH GIFT BOX
+
+PRICE ONLY Rs. 5,600`,
+
+    images: [
+        "Screenshot 2026-11-27 213908.png",
+        "Screenshot 2026-11-27 213645.png",
+        "Screenshot 2026-11-27 213720.png",
+        "Screenshot 2026-11-27 213730.png",
+        "Screenshot 2026-11-27 213741.png",
+        "Screenshot 2026-11-27 213825.png",
+        "Screenshot 2026-11-27 213837.png",
+        "Screenshot 2026-11-27 213848.png",
+        "Screenshot 2026-11-27 213857.png"
+    ],
+
+    badge: "Premium Quality",
+    featured: true,
+    inStock: true
+},
     // 1. COSMO WATCH
     {
         id: "watch-008",
